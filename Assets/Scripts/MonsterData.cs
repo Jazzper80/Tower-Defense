@@ -16,6 +16,8 @@ public class MonsterData : MonoBehaviour
 {
     public List<MonsterLevel> levels;
     private MonsterLevel currentLevel;
+    private GameManagerBehaviour gameManager;
+    private GameObject monster;
 
     public MonsterLevel CurrentLevel
     {
@@ -49,6 +51,9 @@ public class MonsterData : MonoBehaviour
     void OnEnable()
     {
         CurrentLevel = levels[0];
+        monster = this.gameObject;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
+
     }
 
     public MonsterLevel GetNextLevel()
@@ -74,6 +79,30 @@ public class MonsterData : MonoBehaviour
         {
             CurrentLevel = levels[currentLevelIndex + 1];
         }
+    }
+    private void OnMouseUp()
+    {
+        if (CanUpgradeMonster())
+        {
+            monster.GetComponent<MonsterData>().IncreaseLevel();
+            //AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+            //audioSource.PlayOneShot(audioSource.clip);
+            gameManager.Gold -= monster.GetComponent<MonsterData>().CurrentLevel.cost;
+        }
+    }
+
+    private bool CanUpgradeMonster()
+    {
+        if (monster != null)
+        {
+            MonsterData monsterData = monster.GetComponent<MonsterData>();
+            MonsterLevel nextLevel = monsterData.GetNextLevel();
+            if (nextLevel != null)
+            {
+                return gameManager.Gold >= nextLevel.cost;
+            }
+        }
+        return false;
     }
 
 }

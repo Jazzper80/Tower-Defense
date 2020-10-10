@@ -49,12 +49,14 @@ public class SpawnEnemy : MonoBehaviour
                 lastSpawnTime = Time.time;
                 GameObject newEnemy = (GameObject)
                     Instantiate(waves[currentWave].enemyPrefab);
-                newEnemy.GetComponent<MoveEnemy>().waypoints = waypoints;
+                newEnemy.GetComponent<MoveEnemy>().blueWaypoints = waypoints;
                 enemiesSpawned++;
             }
             // 4 
             if (enemiesSpawned == waves[currentWave].maxEnemies &&
-                GameObject.FindGameObjectWithTag("Enemy") == null)
+                GameObject.FindGameObjectWithTag("RedEnemy") == null &&
+                GameObject.FindGameObjectWithTag("BlueEnemy") == null &&
+                GameObject.FindGameObjectWithTag("YellowEnemy") == null)
             {
                 gameManager.Wave++;
                 gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);

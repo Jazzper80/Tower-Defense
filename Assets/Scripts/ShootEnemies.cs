@@ -59,7 +59,15 @@ public class ShootEnemies : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         // 2
-        if (other.gameObject.tag.Equals("Enemy"))
+        if ((this.tag == "RedTower" && other.gameObject.tag.Equals("RedEnemy")) || 
+            (this.tag == "BlueTower" && other.gameObject.tag.Equals("BlueEnemy")) || 
+            (this.tag == "YellowTower" && other.gameObject.tag.Equals("YellowEnemy")) ||
+            (this.tag == "PurpleTower" && (other.gameObject.tag.Equals("RedEnemy") || other.gameObject.tag.Equals("BlueEnemy"))) ||
+            (this.tag == "GreenTower" && (other.gameObject.tag.Equals("YellowEnemy") || other.gameObject.tag.Equals("BlueEnemy"))) ||
+            (this.tag == ("OrangeTower") && (other.gameObject.tag.Equals("YellowEnemy") || other.gameObject.tag.Equals("RedEnemy"))) ||
+            (this.tag == "BrownTower" && (other.gameObject.tag.Equals("YellowEnemy") || other.gameObject.tag.Equals("BlueEnemy") || other.gameObject.tag.Equals("RedEnemy")))
+            
+            )
         {
             enemiesInRange.Add(other.gameObject);
             EnemyDestructionDelegate del =
@@ -70,7 +78,15 @@ public class ShootEnemies : MonoBehaviour
     // 3
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag.Equals("Enemy"))
+        if ((this.tag == "RedTower" && other.gameObject.tag.Equals("RedEnemy")) ||
+            (this.tag == "BlueTower" && other.gameObject.tag.Equals("BlueEnemy")) ||
+            (this.tag == "YellowTower" && other.gameObject.tag.Equals("YellowEnemy")) ||
+            (this.tag == "PurpleTower" && (other.gameObject.tag.Equals("RedEnemy") || other.gameObject.tag.Equals("BlueEnemy"))) ||
+            (this.tag == "GreenTower" && (other.gameObject.tag.Equals("YellowEnemy") || other.gameObject.tag.Equals("BlueEnemy"))) ||
+            (this.tag == ("OrangeTower") && (other.gameObject.tag.Equals("YellowEnemy") || other.gameObject.tag.Equals("RedEnemy"))) ||
+            (this.tag == "BrownTower" && (other.gameObject.tag.Equals("YellowEnemy") || other.gameObject.tag.Equals("BlueEnemy") || other.gameObject.tag.Equals("RedEnemy")))
+
+            )
         {
             enemiesInRange.Remove(other.gameObject);
             EnemyDestructionDelegate del =
@@ -96,11 +112,11 @@ public class ShootEnemies : MonoBehaviour
         bulletComp.targetPosition = targetPosition;
 
         // 3 
-        Animator animator =
-            monsterData.CurrentLevel.visualization.GetComponent<Animator>();
-        animator.SetTrigger("fireShot");
-        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.PlayOneShot(audioSource.clip);
+        //Animator animator =
+       //     monsterData.CurrentLevel.visualization.GetComponent<Animator>();
+        //animator.SetTrigger("fireShot");
+        //AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        //audioSource.PlayOneShot(audioSource.clip);
     }
 
 }
