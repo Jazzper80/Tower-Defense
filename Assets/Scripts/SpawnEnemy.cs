@@ -70,6 +70,8 @@ public class SpawnEnemy : MonoBehaviour
             gameManager.gameOver = true;
             GameObject gameOverText = GameObject.FindGameObjectWithTag("GameWon");
             gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
+            //hier moet dus iets gaan komen zodat het volgende level start.
+            //Keuze maken uit overworld met verschillende scenes, of een groot level waarin de verschillende backgrounds etc als prefabs geladen worden via een script.
         }
 
     }

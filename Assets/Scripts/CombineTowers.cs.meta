@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 0f1c44e4f2f720b49a89a0c04d169b98
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - blueTower: {fileID: 134384, guid: 1337416bd4bf09e4a98e97f2b67992f7, type: 3}
+  - yellowTower: {instanceID: 0}
+  - redTower: {instanceID: 0}
+  - orangeTower: {instanceID: 0}
+  - greenTower: {instanceID: 0}
+  - purpleTower: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

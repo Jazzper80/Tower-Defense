@@ -20,7 +20,7 @@ public class TowerChooser : MonoBehaviour
     }
 
 
-    private void OnMouseUp()
+    /*private void OnMouseUp()
     {
         _TowerChooser = GameObject.FindGameObjectWithTag("TowerChooser");
         if (_TowerChooser == null)
@@ -53,7 +53,7 @@ public class TowerChooser : MonoBehaviour
         //als het monster niet null is en niet meer kost dan hoeveel je hebt
         return gameManager.Gold >= cost;
 
-    }
+    }*/
 
 }
 

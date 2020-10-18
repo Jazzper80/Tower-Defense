@@ -7,6 +7,7 @@ public class MonsterLevel
 {
     public int cost;
     public GameObject visualization;
+    public Sprite towerImage;
     public GameObject bullet;
     public float fireRate;
 
@@ -25,7 +26,8 @@ public class MonsterData : MonoBehaviour
         {
             return currentLevel;
         }
-        set
+    }
+        /*set
         {
             currentLevel = value;
             int currentLevelIndex = levels.IndexOf(currentLevel);
@@ -46,17 +48,18 @@ public class MonsterData : MonoBehaviour
                 }
             }
         }
-    }
-
+    /*
+        }
+    
     void OnEnable()
     {
-        CurrentLevel = levels[0];
+        //CurrentLevel = levels[0];
         monster = this.gameObject;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
 
     }
 
-    public MonsterLevel GetNextLevel()
+    /*public MonsterLevel GetNextLevel()
     {
         int currentLevelIndex = levels.IndexOf(currentLevel);
         int maxLevelIndex = levels.Count - 1;
@@ -79,30 +82,6 @@ public class MonsterData : MonoBehaviour
         {
             CurrentLevel = levels[currentLevelIndex + 1];
         }
-    }
-    private void OnMouseUp()
-    {
-        if (CanUpgradeMonster())
-        {
-            monster.GetComponent<MonsterData>().IncreaseLevel();
-            //AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-            //audioSource.PlayOneShot(audioSource.clip);
-            gameManager.Gold -= monster.GetComponent<MonsterData>().CurrentLevel.cost;
-        }
-    }
-
-    private bool CanUpgradeMonster()
-    {
-        if (monster != null)
-        {
-            MonsterData monsterData = monster.GetComponent<MonsterData>();
-            MonsterLevel nextLevel = monsterData.GetNextLevel();
-            if (nextLevel != null)
-            {
-                return gameManager.Gold >= nextLevel.cost;
-            }
-        }
-        return false;
-    }
-
+    }*/
 }
+    
