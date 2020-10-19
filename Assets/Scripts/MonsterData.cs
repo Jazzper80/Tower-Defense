@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class MonsterLevel
 {
-    public int cost;
-    public GameObject visualization;
-    public Sprite towerImage;
     public GameObject bullet;
     public float fireRate;
 

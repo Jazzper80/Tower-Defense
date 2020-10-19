@@ -147,10 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - cost: 200
-    visualization: {fileID: 0}
-    towerImage: {fileID: 0}
-    bullet: {fileID: 5951009023929119581, guid: 6bf1ca98b36870e48a1450ccefd4c6a0,
+  - bullet: {fileID: 5951009023929119581, guid: 6bf1ca98b36870e48a1450ccefd4c6a0,
       type: 3}
     fireRate: 1
 --- !u!58 &8966329781575189384
@@ -182,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesInRange: []
-  canShoot: 0
+  canShoot: 1
 --- !u!50 &6601757394438811241
 Rigidbody2D:
   serializedVersion: 4
@@ -201,7 +198,7 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &4182060824282865099
@@ -216,14 +213,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b7ca521716f9a499e4b4f10ca6af2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenPoint: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: 0}
   blueTower: {fileID: 134384, guid: 1337416bd4bf09e4a98e97f2b67992f7, type: 3}
   yellowTower: {fileID: 134384, guid: 8b959510cfa2ebd49ba900450ca497b4, type: 3}
   redTower: {fileID: 134384, guid: 12f6023ddab58484b855cfaf5e44d811, type: 3}
   orangeTower: {fileID: 134384, guid: b283a3a937a96b44d8d63399833b4645, type: 3}
   greenTower: {fileID: 134384}
   purpleTower: {fileID: 134384, guid: bfdc7084a614f04468f48db6714ce74a, type: 3}
+  thisTower: {fileID: 0}
   hoveringOnOpenSpot: 0
+  colourOfCollision: 
+  openSpotBeingHovered: {x: 0, y: 0, z: 0}
+  shootEnemies: {fileID: 0}
+  openSpot: {fileID: 0}
+  towerSetOnOpenspot: {fileID: 0}
   towerHasBeenSet: 0
+  hasOtherTowerBeenSet: 0
   overlaySprite: {fileID: 4191147685759250188}
 --- !u!212 &1945095696722286420
 SpriteRenderer:

@@ -20,8 +20,8 @@ public class BulletBehaviour : MonoBehaviour
     {
         startTime = Time.time;
         distance = Vector2.Distance(startPosition, targetPosition);
-        GameObject gm = GameObject.Find("GameManager");
-        gameManager = gm.GetComponent<GameManagerBehaviour>();
+        //GameObject gm = GameObject.Find("GameManager");
+        //gameManager = gm.GetComponent<GameManagerBehaviour>();
 
     }
 
@@ -48,7 +48,7 @@ public class BulletBehaviour : MonoBehaviour
                     AudioSource audioSource = target.GetComponent<AudioSource>();
                     AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 
-                    gameManager.Gold += 50;
+                    //gameManager.Gold += 50;
                 }
             }
             Destroy(gameObject);
