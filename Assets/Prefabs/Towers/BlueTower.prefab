@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1285807067455734615}
   - component: {fileID: 1312255621589454749}
   - component: {fileID: 2783172308022646843}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: BlueTower
   m_TagString: BlueTower
   m_Icon: {fileID: 0}
@@ -30,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134384}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 2669081146266703559}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8224800
 AudioSource:
   m_ObjectHideFlags: 0
@@ -231,6 +231,7 @@ MonoBehaviour:
   towerHasBeenSet: 0
   hasOtherTowerBeenSet: 0
   overlaySprite: {fileID: 6888271974492687695}
+  towerLocation: {x: 0, y: 0, z: 0}
 --- !u!212 &2783172308022646843
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2669081146266703559}
   - component: {fileID: 2349288018758858856}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: BlueOverlaySemiTransparant
   m_TagString: Untagged
   m_Icon: {fileID: 0}

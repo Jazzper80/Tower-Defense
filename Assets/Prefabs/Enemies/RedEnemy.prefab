@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blueWaypoints: []
-  speed: 1
+  speed: 2
 --- !u!50 &-8902766810960574057
 Rigidbody2D:
   serializedVersion: 4

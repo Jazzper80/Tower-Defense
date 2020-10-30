@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Wave
@@ -12,67 +14,67 @@ public class Wave
 
 public class SpawnEnemy : MonoBehaviour
 {
-    public Wave[] waves;
-    public int timeBetweenWaves = 5;
-
+    public float timeBetweenEnemies = 2;
+    public bool startSpawingEnemies;
     private GameManagerBehaviour gameManager;
 
     private float lastSpawnTime;
     private int enemiesSpawned = 0;
 
+    public GameObject[] enemiesInThisLevel;
 
     public GameObject[] waypoints;
     public GameObject testEnemyPrefab;
 
+    private int enemiesCounter;
+    private SceneLoader sceneLoader;
+
+    public int enemiesStillAlive;
+    private bool endOfLevelReached;
+
+    private int currentSceneIndex;
+
     private void Start()
     {
-        lastSpawnTime = Time.time;
-        gameManager =
-            GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
-
+        startSpawingEnemies = true;
+        enemiesCounter = enemiesInThisLevel.Length;
+        sceneLoader = GameObject.Find("Main Camera").GetComponent<SceneLoader>();
+        timeBetweenEnemies = 2;
+        endOfLevelReached = false;
+        currentSceneIndex = SceneManager.sceneCountInBuildSettings;
     }
 
     private void Update()
     {
-        // 1
-        int currentWave = gameManager.Wave;
-        if (currentWave < waves.Length)
+        if(timeBetweenEnemies <0 && enemiesCounter >= 0 && endOfLevelReached == false)
         {
-            // 2
-            float timeInterval = Time.time - lastSpawnTime;
-            float spawnInterval = waves[currentWave].spawnInterval;
-            if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
-                 timeInterval > spawnInterval) &&
-                enemiesSpawned < waves[currentWave].maxEnemies)
-            {
-                // 3  
-                lastSpawnTime = Time.time;
-                GameObject newEnemy = (GameObject)
-                    Instantiate(waves[currentWave].enemyPrefab);
-                newEnemy.GetComponent<MoveEnemy>().blueWaypoints = waypoints;
-                enemiesSpawned++;
-            }
-            // 4 
-            if (enemiesSpawned == waves[currentWave].maxEnemies &&
-                GameObject.FindGameObjectWithTag("RedEnemy") == null &&
-                GameObject.FindGameObjectWithTag("BlueEnemy") == null &&
-                GameObject.FindGameObjectWithTag("YellowEnemy") == null)
-            {
-                gameManager.Wave++;
-                gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);
-                enemiesSpawned = 0;
-                lastSpawnTime = Time.time;
-            }
-            // 5 
+            timeBetweenEnemies = 2;
+            SpawnEnemiesThisLevel();
+        }
+
+        timeBetweenEnemies -= Time.deltaTime;
+    }
+
+    private void SpawnEnemiesThisLevel()
+        {
+        if (enemiesCounter > 0)
+        {
+            GameObject newEnemy = Instantiate(enemiesInThisLevel[enemiesCounter - 1], new Vector3 (-20f, 0f,0f), Quaternion.identity);
+            enemiesStillAlive += 1;
+            newEnemy.GetComponent<MoveEnemy>().blueWaypoints = waypoints;
+            enemiesCounter -= 1;
+        }
+        else if(enemiesStillAlive == 0)
+        {
+            endOfLevelReached = true;
+            currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            sceneLoader.LoadMyScene(currentSceneIndex + 1);
         }
         else
         {
-            gameManager.gameOver = true;
-            GameObject gameOverText = GameObject.FindGameObjectWithTag("GameWon");
-            gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
-            //hier moet dus iets gaan komen zodat het volgende level start.
-            //Keuze maken uit overworld met verschillende scenes, of een groot level waarin de verschillende backgrounds etc als prefabs geladen worden via een script.
+            return;
         }
-
     }
+
+
 }

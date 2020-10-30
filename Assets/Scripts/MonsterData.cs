@@ -23,40 +23,23 @@ public class MonsterData : MonoBehaviour
         {
             return currentLevel;
         }
-    }
-        /*set
+
+        set
         {
             currentLevel = value;
             int currentLevelIndex = levels.IndexOf(currentLevel);
+        }
+    }
 
-            GameObject levelVisualization = levels[currentLevelIndex].visualization;
-            for (int i=0; i < levels.Count; i++)
-            {
-                if(levelVisualization != null)
-                {
-                    if(i == currentLevelIndex)
-                    {
-                        levels[i].visualization.SetActive(true);
-                    }
-                    else
-                    {
-                        levels[i].visualization.SetActive(false);
-                    }
-                }
-            }
-        }
-    /*
-        }
-    
     void OnEnable()
     {
-        //CurrentLevel = levels[0];
+        CurrentLevel = levels[0];
         monster = this.gameObject;
-        //gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
 
     }
 
-    /*public MonsterLevel GetNextLevel()
+    public MonsterLevel GetNextLevel()
     {
         int currentLevelIndex = levels.IndexOf(currentLevel);
         int maxLevelIndex = levels.Count - 1;
@@ -79,6 +62,6 @@ public class MonsterData : MonoBehaviour
         {
             CurrentLevel = levels[currentLevelIndex + 1];
         }
-    }*/
+    }
 }
     

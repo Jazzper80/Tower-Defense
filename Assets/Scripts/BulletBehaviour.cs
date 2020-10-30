@@ -16,12 +16,22 @@ public class BulletBehaviour : MonoBehaviour
 
     private GameManagerBehaviour gameManager;
 
+    private SpawnEnemy spawnEnemy;
+
     private void Start()
     {
         startTime = Time.time;
         distance = Vector2.Distance(startPosition, targetPosition);
         //GameObject gm = GameObject.Find("GameManager");
         //gameManager = gm.GetComponent<GameManagerBehaviour>();
+        if(GameObject.Find("YellowRoad"))
+        {
+            spawnEnemy = GameObject.Find("YellowRoad").GetComponent<SpawnEnemy>();
+        }
+        else if (GameObject.Find("OrangeRoad"))
+        {
+            spawnEnemy = GameObject.Find("OrangeRoad").GetComponent<SpawnEnemy>();
+        }
 
     }
 
@@ -45,10 +55,10 @@ public class BulletBehaviour : MonoBehaviour
                 if (healthBar.currentHealth <= 0)
                 {
                     Destroy(target);
+                    spawnEnemy.enemiesStillAlive -= 1;
                     AudioSource audioSource = target.GetComponent<AudioSource>();
                     AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
 
-                    //gameManager.Gold += 50;
                 }
             }
             Destroy(gameObject);

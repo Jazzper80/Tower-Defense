@@ -24,6 +24,9 @@ public class DragTowers : MonoBehaviour
 
     public GameObject overlaySprite;
 
+    private BoxCollider2D boxCollider2D;
+
+    public Vector3 towerLocation;
 
     private void Start()
     {
@@ -45,12 +48,13 @@ public class DragTowers : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if(openSpot != null)
+        if (openSpot != null)
         {
             if (openSpot.CompareTag("Openspot"))
             {
                 openSpot.GetComponent<BoxCollider2D>().isTrigger = true;
                 towerHasBeenSet = false;
+
             }
         }
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
@@ -61,33 +65,33 @@ public class DragTowers : MonoBehaviour
 
     void OnMouseDrag()
     {
-            Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-            Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-            transform.position = curPosition;
+        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        transform.position = curPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         openSpot = collision.gameObject;
 
-        if(collision.CompareTag("Openspot"))
+        if (collision.CompareTag("Openspot"))
         {
             hoveringOnOpenSpot = true;
             openSpotBeingHovered = collision.gameObject.transform.position;
         }
-        else if(collision.CompareTag("BlueTower") && collision.GetComponent<DragTowers>().towerHasBeenSet == true)
+        else if (collision.CompareTag("BlueTower") && collision.GetComponent<DragTowers>().towerHasBeenSet == true)
         {
             towerSetOnOpenspot = collision.gameObject;
             hasOtherTowerBeenSet = openSpot.GetComponent<DragTowers>().towerHasBeenSet;
             colourOfCollision = "Blue";
         }
-        else if(collision.CompareTag("YellowTower") && collision.GetComponent<DragTowers>().towerHasBeenSet == true)
+        else if (collision.CompareTag("YellowTower") && collision.GetComponent<DragTowers>().towerHasBeenSet == true)
         {
             towerSetOnOpenspot = collision.gameObject;
             hasOtherTowerBeenSet = openSpot.GetComponent<DragTowers>().towerHasBeenSet;
             colourOfCollision = "Yellow";
         }
-        else if(collision.CompareTag("RedTower") && collision.GetComponent<DragTowers>().towerHasBeenSet == true)
+        else if (collision.CompareTag("RedTower") && collision.GetComponent<DragTowers>().towerHasBeenSet == true)
         {
             towerSetOnOpenspot = collision.gameObject;
             hasOtherTowerBeenSet = openSpot.GetComponent<DragTowers>().towerHasBeenSet;
@@ -114,55 +118,61 @@ public class DragTowers : MonoBehaviour
             this.transform.position = openSpotBeingHovered;
             shootEnemies.canShoot = true;
             towerHasBeenSet = true;
-            if(openSpot.CompareTag("Openspot"))
+            if (openSpot.CompareTag("Openspot"))
             {
                 openSpot.GetComponent<BoxCollider2D>().isTrigger = false;
+                //openSpot.transform.position = openSpot.transform.position + new Vector3(0, 0.1f, 0);
             }
+            //dus hier iets om de boxcollider uit en aan te zetten
+        
+            
+            
             CombineTower();
         }
     }
     private void CombineTower()
     {
-        if(hoveringOnOpenSpot == true && hasOtherTowerBeenSet == true)
+        towerLocation = transform.position - new Vector3(0, 0, 0.1f);
+        if (hoveringOnOpenSpot == true && hasOtherTowerBeenSet == true)
         {
             if (thisTower.CompareTag("YellowTower") && colourOfCollision == "Blue")
             {
-                Instantiate(greenTower, transform.position, Quaternion.identity);
+                Instantiate(greenTower, towerLocation, Quaternion.identity);
                 greenTower.GetComponent<ShootEnemies>().canShoot = true;
                 Destroy(towerSetOnOpenspot);
                 Destroy(thisTower);
             }
             else if (thisTower.CompareTag("BlueTower") && colourOfCollision == "Yellow")
             {
-                Instantiate(greenTower, transform.position, Quaternion.identity);
+                Instantiate(greenTower, towerLocation, Quaternion.identity);
                 greenTower.GetComponent<ShootEnemies>().canShoot = true;
                 Destroy(towerSetOnOpenspot);
                 Destroy(thisTower);
             }
             else if (thisTower.CompareTag("BlueTower") && colourOfCollision == "Red")
             {
-                Instantiate(purpleTower, transform.position, Quaternion.identity);
+                Instantiate(purpleTower, towerLocation, Quaternion.identity);
                 purpleTower.GetComponent<ShootEnemies>().canShoot = true;
                 Destroy(towerSetOnOpenspot);
                 Destroy(thisTower);
             }
             else if (thisTower.CompareTag("RedTower") && colourOfCollision == "Blue")
             {
-                Instantiate(purpleTower, transform.position, Quaternion.identity);
+                Instantiate(purpleTower, towerLocation, Quaternion.identity);
                 purpleTower.GetComponent<ShootEnemies>().canShoot = true;
                 Destroy(towerSetOnOpenspot);
                 Destroy(thisTower);
             }
             else if (thisTower.CompareTag("YellowTower") && colourOfCollision == "Red")
             {
-                Instantiate(orangeTower, transform.position, Quaternion.identity);
+                Instantiate(orangeTower, towerLocation, Quaternion.identity);
                 orangeTower.GetComponent<ShootEnemies>().canShoot = true;
                 Destroy(towerSetOnOpenspot);
                 Destroy(thisTower);
             }
             else if (thisTower.CompareTag("RedTower") && colourOfCollision == "Yellow")
             {
-                Instantiate(orangeTower, transform.position, Quaternion.identity);
+                Instantiate(orangeTower, towerLocation, Quaternion.identity);
                 orangeTower.GetComponent<ShootEnemies>().canShoot = true;
                 Destroy(towerSetOnOpenspot);
                 Destroy(thisTower);

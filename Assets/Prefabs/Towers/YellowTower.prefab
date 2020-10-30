@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1079387826}
   - component: {fileID: 6734011960336486857}
   - component: {fileID: 5866834455098320348}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: YellowTower
   m_TagString: YellowTower
   m_Icon: {fileID: 0}
@@ -30,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134384}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 5999069960545856288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8224800
 AudioSource:
   m_ObjectHideFlags: 0
@@ -231,6 +231,7 @@ MonoBehaviour:
   towerHasBeenSet: 0
   hasOtherTowerBeenSet: 0
   overlaySprite: {fileID: 123212839783739302}
+  towerLocation: {x: 0, y: 0, z: 0}
 --- !u!212 &5866834455098320348
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5999069960545856288}
   - component: {fileID: 1260989411320339494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: YellowOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}

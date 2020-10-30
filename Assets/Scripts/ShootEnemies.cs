@@ -9,7 +9,6 @@ public class ShootEnemies : MonoBehaviour
     private float lastShotTime;
     private MonsterData monsterData;
     public bool canShoot = false;
-
     private void Start()
     {
         enemiesInRange = new List<GameObject>();
@@ -29,20 +28,20 @@ public class ShootEnemies : MonoBehaviour
                 target = enemy;
                 minimalEnemyDistance = distanceToGoal;
             }
-        }
-        if (target != null)
-        {
-            if (Time.time - lastShotTime > monsterData.CurrentLevel.fireRate)
-            {
-                Shoot(target.GetComponent<Collider2D>());
-                lastShotTime = Time.time;
-            }
-            Vector3 direction = gameObject.transform.position - target.transform.position;
-            gameObject.transform.rotation = Quaternion.AngleAxis(
-                Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI,
-                new Vector3(0, 0, 1));
-        }
 
+            if (target != null)
+            {
+                if (Time.time - lastShotTime > monsterData.CurrentLevel.fireRate)
+                {
+                    Shoot(target.GetComponent<Collider2D>());
+                    lastShotTime = Time.time;
+                }
+                Vector3 direction = gameObject.transform.position - target.transform.position;
+                gameObject.transform.rotation = Quaternion.AngleAxis(
+                    Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI,
+                    new Vector3(0, 0, 1));
+            }
+        }
     }
 
     void OnEnemyDestroy(GameObject enemy)
@@ -50,38 +49,39 @@ public class ShootEnemies : MonoBehaviour
         enemiesInRange.Remove(enemy);
     }
 
+
     void OnTriggerEnter2D(Collider2D other)
     {
-            if  (
-                CompareTag("RedTower") && other.gameObject.CompareTag("RedEnemy") ||
-                CompareTag("BlueTower") && other.gameObject.CompareTag("BlueEnemy") ||
-                CompareTag("YellowTower") && other.gameObject.CompareTag("YellowEnemy") ||
-                CompareTag("PurpleTower") && other.gameObject.CompareTag("RedEnemy") || other.gameObject.CompareTag("BlueEnemy") ||
-                CompareTag("GreenTower") && other.gameObject.CompareTag("YellowEnemy") || other.gameObject.CompareTag("BlueEnemy") ||
-                CompareTag("OrangeTower") && other.gameObject.CompareTag("YellowEnemy") || other.gameObject.CompareTag("RedEnemy") ||
-                CompareTag("BrownTower") && other.gameObject.CompareTag("YellowEnemy") || other.gameObject.CompareTag("BlueEnemy") || other.gameObject.CompareTag("RedEnemy")
-                )
-            {
-                enemiesInRange.Add(other.gameObject);
-                EnemyDestructionDelegate del =
+        if (CompareTag("RedTower") && other.gameObject.CompareTag("RedEnemy") ||
+            CompareTag("BlueTower") && other.gameObject.CompareTag("BlueEnemy") ||
+            CompareTag("YellowTower") && other.gameObject.CompareTag("YellowEnemy") ||
+            CompareTag("PurpleTower") && other.gameObject.CompareTag("RedEnemy") || CompareTag("PurpleTower") && other.gameObject.CompareTag("BlueEnemy") || CompareTag("PurpleTower") && other.gameObject.CompareTag("PurpleEnemy") ||
+            CompareTag("GreenTower") && other.gameObject.CompareTag("YellowEnemy") || CompareTag("GreenTower") && other.gameObject.CompareTag("BlueEnemy") || CompareTag("GreenTower") && other.gameObject.CompareTag("GreenEnemy") ||
+            CompareTag("OrangeTower") && other.gameObject.CompareTag("YellowEnemy") || CompareTag("OrangeTower") && other.gameObject.CompareTag("RedEnemy") || CompareTag("OrangeTower") && other.gameObject.CompareTag("OrangeEnemy")
+            )
+          {
+            enemiesInRange.Add(other.gameObject);
+            Debug.Log("enemy removed " + other);
+            EnemyDestructionDelegate del =
                 other.gameObject.GetComponent<EnemyDestructionDelegate>();
-                del.enemyDelegate += OnEnemyDestroy;
-            }
+            del.enemyDelegate -= OnEnemyDestroy;
+        }
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (
             CompareTag("RedTower") && other.gameObject.CompareTag("RedEnemy") ||
             CompareTag("BlueTower") && other.gameObject.CompareTag("BlueEnemy") ||
             CompareTag("YellowTower") && other.gameObject.CompareTag("YellowEnemy") ||
-            CompareTag("PurpleTower") && other.gameObject.CompareTag("RedEnemy") || other.gameObject.CompareTag("BlueEnemy") ||
-            CompareTag("GreenTower") && other.gameObject.CompareTag("YellowEnemy") || other.gameObject.CompareTag("BlueEnemy") ||
-            CompareTag("OrangeTower") && other.gameObject.CompareTag("YellowEnemy") || other.gameObject.CompareTag("RedEnemy") ||
-            CompareTag("BrownTower") && other.gameObject.CompareTag("YellowEnemy") || other.gameObject.CompareTag("BlueEnemy") || other.gameObject.CompareTag("RedEnemy")
+            CompareTag("PurpleTower") && other.gameObject.CompareTag("RedEnemy") || CompareTag("PurpleTower") && other.gameObject.CompareTag("BlueEnemy") || CompareTag("PurpleTower") && other.gameObject.CompareTag("PurpleEnemy") ||
+            CompareTag("GreenTower") && other.gameObject.CompareTag("YellowEnemy") || CompareTag("GreenTower") &&  other.gameObject.CompareTag("BlueEnemy") || CompareTag("GreenTower") &&  other.gameObject.CompareTag("GreenEnemy") ||
+            CompareTag("OrangeTower") && other.gameObject.CompareTag("YellowEnemy") || CompareTag("OrangeTower") &&  other.gameObject.CompareTag("RedEnemy") || CompareTag("OrangeTower") &&  other.gameObject.CompareTag("OrangeEnemy")
             )
         {
-                enemiesInRange.Remove(other.gameObject);
-                EnemyDestructionDelegate del =
+            enemiesInRange.Remove(other.gameObject);
+            Debug.Log("enemy removed " + other);
+            EnemyDestructionDelegate del =
                 other.gameObject.GetComponent<EnemyDestructionDelegate>();
                 del.enemyDelegate -= OnEnemyDestroy;
             }

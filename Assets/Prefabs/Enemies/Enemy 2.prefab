@@ -248,8 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46e99ca6e7288c43b90b48f7424baaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
-  speed: 3
+  blueWaypoints: []
+  speed: 2
 --- !u!50 &-1301104322739602303
 Rigidbody2D:
   serializedVersion: 4

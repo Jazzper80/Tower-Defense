@@ -19,6 +19,9 @@ TagManager:
   - TowerChooser
   - Openspot
   - OrangeTower
+  - OrangeEnemy
+  - GreenEnemy
+  - PurpleEnemy
   layers:
   - Default
   - TransparentFX
@@ -28,8 +31,8 @@ TagManager:
   - UI
   - 
   - 
-  - Towers and openspots
-  - 
+  - Openspots
+  - Towers
   - 
   - 
   - 

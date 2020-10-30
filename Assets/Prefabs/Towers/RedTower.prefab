@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6941655462554132122}
   - component: {fileID: 1101442739936323780}
   - component: {fileID: 7664890112477385103}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: RedTower
   m_TagString: RedTower
   m_Icon: {fileID: 0}
@@ -30,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134384}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 6264657370007324958}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8224800
 AudioSource:
   m_ObjectHideFlags: 0
@@ -231,6 +231,7 @@ MonoBehaviour:
   towerHasBeenSet: 0
   hasOtherTowerBeenSet: 0
   overlaySprite: {fileID: 4385333370291466115}
+  towerLocation: {x: 0, y: 0, z: 0}
 --- !u!212 &7664890112477385103
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6264657370007324958}
   - component: {fileID: 6396170708459516018}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: RedOverlaySemiTransparant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
